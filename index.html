@@ -88,8 +88,8 @@
 
     #site-nav.scrolled .nav-link  { color: #1C1C1A; }
     #site-nav.scrolled .nav-logo  { color: #1B4332; }
-    #site-nav.scrolled .nav-cta   { border-color: #1B4332; color: #1B4332; }
-    #site-nav.scrolled .nav-cta:hover { background: #1B4332; color: #F5F5F3; }
+    #site-nav.scrolled .nav-cta   { border-color: #FCAE17; color: #1C1C1A; background: #FCAE17; }
+    #site-nav.scrolled .nav-cta:hover { background: #e49c10; border-color: #e49c10; color: #1C1C1A; }
 
     /* ─── Hero ────────────────────────────────────────── */
     #hero {
@@ -135,22 +135,23 @@
       align-items: center;
       gap: 0.6rem;
       padding: 0.85rem 2rem;
-      background: #F5F5F3;
-      color: #1B4332;
+      background: #FCAE17;
+      color: #1C1C1A;
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
-      border: 1px solid #F5F5F3;
+      border: 1px solid #FCAE17;
       transition: background 0.3s, color 0.3s, border-color 0.3s;
       cursor: pointer;
     }
 
     .btn-primary:hover {
-      background: transparent;
-      color: #F5F5F3;
+      background: #e49c10;
+      border-color: #e49c10;
+      color: #1C1C1A;
     }
 
     .btn-ghost {
@@ -159,21 +160,21 @@
       gap: 0.6rem;
       padding: 0.85rem 2rem;
       background: transparent;
-      color: #F5F5F3;
+      color: #FCAE17;
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
-      border: 1px solid rgba(245, 245, 243, 0.5);
+      border: 1px solid rgba(252, 174, 23, 0.6);
       transition: background 0.3s, color 0.3s, border-color 0.3s;
       cursor: pointer;
     }
 
     .btn-ghost:hover {
-      border-color: #F5F5F3;
-      background: rgba(245, 245, 243, 0.08);
+      border-color: #FCAE17;
+      background: rgba(252, 174, 23, 0.1);
     }
 
     .btn-dark {
@@ -181,22 +182,22 @@
       align-items: center;
       gap: 0.6rem;
       padding: 0.85rem 2rem;
-      background: #1B4332;
-      color: #F5F5F3;
+      background: #FCAE17;
+      color: #1C1C1A;
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
-      border: 1px solid #1B4332;
+      border: 1px solid #FCAE17;
       transition: background 0.3s, color 0.3s;
       cursor: pointer;
     }
 
     .btn-dark:hover {
-      background: #1C1C1A;
-      border-color: #1C1C1A;
+      background: #e49c10;
+      border-color: #e49c10;
     }
 
     /* ─── Scroll indicator ────────────────────────────── */
@@ -337,14 +338,16 @@
   ══════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Hero — Waterfront hotel overview">
 
-    <!-- Parallax image -->
-    <img
+    <!-- Parallax video -->
+    <video
       id="hero-img"
-      src="https://hotelmaritim.no/content/uploads/2023/11/QHM-fasade-6-e1699565603747.jpg"
-      alt="Quality Hotel Maritim fasade ved Smedasundet, Haugesund"
-      loading="eager"
-      fetchpriority="high"
-    />
+      src="video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-hidden="true"
+    ></video>
 
     <!-- Gradient overlay -->
     <div id="hero-overlay" aria-hidden="true"></div>
