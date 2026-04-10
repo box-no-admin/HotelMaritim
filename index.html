@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="nb" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Quality Hotel Maritim — Opplevelser ved vannet i hjertet av Haugesund. 311 rom og suiter, restauranter, konferansefasiliteter og flytende badstuer på Smedasundet." />
+  <meta name="keywords" content="Quality Hotel Maritim, hotell Haugesund, sjøfront hotell Norge, konferansehotell Haugesund, Smedasundet, Fjord-Norge" />
+  <meta property="og:title" content="Quality Hotel Maritim | Haugesund, Norge" />
+  <meta property="og:description" content="Gjestfrihet ved vannet i hjertet av Haugesund. 311 rom, prisbelønnet frokost og flytende badstuer på Smedasundet." />
+  <meta property="og:type" content="website" />
+  <title>Quality Hotel Maritim | Haugesund, Norge</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen:    '#F8F5F0',
+            navy:     '#1C2B3A',
+            fjord:    '#8BA7B5',
+            sand:     '#D4C4A8',
+            charcoal: '#2C2C2A',
+            muted:    '#6B7280',
+          },
+          fontFamily: {
+            serif:  ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:   ['Inter', 'system-ui', 'sans-serif'],
+            bask:   ['"Libre Baskerville"', 'Georgia', 'serif'],
+          },
+          letterSpacing: {
+            ultra: '0.25em',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── Base ────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background-color: #F8F5F0;
+      color: #2C2C2A;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ───────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #F8F5F0; }
+    ::-webkit-scrollbar-thumb { background: #8BA7B5; border-radius: 3px; }
+
+    /* ─── Typography helpers ──────────────────────────── */
+    .font-serif    { font-family: 'Playfair Display', Georgia, serif; }
+    .font-bask     { font-family: 'Libre Baskerville', Georgia, serif; }
+    .label-caps    { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+
+    /* ─── Navigation ──────────────────────────────────── */
+    #site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.4s ease;
+      padding: 0 2rem;
+    }
+
+    #site-nav.scrolled {
+      background: rgba(248, 245, 240, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 rgba(28, 43, 58, 0.08);
+    }
+
+    #site-nav.scrolled .nav-link  { color: #2C2C2A; }
+    #site-nav.scrolled .nav-logo  { color: #1C2B3A; }
+    #site-nav.scrolled .nav-cta   { border-color: #1C2B3A; color: #1C2B3A; }
+    #site-nav.scrolled .nav-cta:hover { background: #1C2B3A; color: #F8F5F0; }
+
+    /* ─── Hero ────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100dvh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    #hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 110%;   /* extra room for parallax */
+      object-fit: cover;
+      object-position: center 30%;
+      will-change: transform;
+    }
+
+    #hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(28, 43, 58, 0.78) 0%,
+        rgba(28, 43, 58, 0.22) 55%,
+        rgba(28, 43, 58, 0.05) 100%
+      );
+    }
+
+    #hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ─── Buttons ─────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      background: #F8F5F0;
+      color: #1C2B3A;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid #F8F5F0;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: #F8F5F0;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: #F8F5F0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(248, 245, 240, 0.5);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-color: #F8F5F0;
+      background: rgba(248, 245, 240, 0.08);
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      background: #1C2B3A;
+      color: #F8F5F0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid #1C2B3A;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-dark:hover {
+      background: #2C2C2A;
+      border-color: #2C2C2A;
+    }
+
+    /* ─── Scroll indicator ────────────────────────────── */
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: rgba(248,245,240,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #F8F5F0;
+      animation: scroll-drop 1.8s ease-in-out infinite;
+    }
+    @keyframes scroll-drop {
+      0%   { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    /* ─── Section helpers ─────────────────────────────── */
+    .section-pad { padding: 7rem 2rem; }
+    @media (min-width: 1024px) { .section-pad { padding: 9rem 4rem; } }
+    @media (min-width: 1280px) { .section-pad { padding: 10rem 6rem; } }
+
+    .divider-line {
+      width: 40px;
+      height: 1px;
+      background: #8BA7B5;
+      display: block;
+    }
+
+    /* ─── Reveal animations ───────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(32px); }
+    .reveal-left { opacity: 0; transform: translateX(-32px); }
+    .reveal-right { opacity: 0; transform: translateX(32px); }
+    .reveal-scale { opacity: 0; transform: scale(0.96); }
+
+    /* ─── Mobile menu ─────────────────────────────────── */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: #1C2B3A;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: #F8F5F0;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: #8BA7B5; }
+    #mobile-menu .menu-cta {
+      margin-top: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F8F5F0;
+      border: 1px solid rgba(248,245,240,0.4);
+      padding: 0.75rem 1.8rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════════════ -->
+  <nav id="site-nav" aria-label="Main navigation">
+    <div class="flex items-center justify-between h-20 max-w-screen-2xl mx-auto">
+
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo flex flex-col leading-none text-white transition-colors duration-300" aria-label="Quality Hotel Maritim — Home">
+        <span class="font-serif text-xl tracking-wide font-medium">Maritim</span>
+        <span class="label-caps text-white/60" style="font-size:0.58rem; letter-spacing:0.2em;">Quality Hotel · Haugesund</span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="hidden lg:flex items-center gap-8">
+        <li><a href="#rooms"       class="nav-link label-caps text-white/80 hover:text-white transition-colors duration-200">Rom</a></li>
+        <li><a href="#dining"      class="nav-link label-caps text-white/80 hover:text-white transition-colors duration-200">Spisesteder</a></li>
+        <li><a href="#conferences" class="nav-link label-caps text-white/80 hover:text-white transition-colors duration-200">Konferanse</a></li>
+        <li><a href="#wellness"    class="nav-link label-caps text-white/80 hover:text-white transition-colors duration-200">Opplevelser</a></li>
+        <li><a href="#destination" class="nav-link label-caps text-white/80 hover:text-white transition-colors duration-200">Destinasjon</a></li>
+      </ul>
+
+      <!-- Desktop CTA -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="tel:+4752869300" class="nav-link label-caps text-white/60 hover:text-white transition-colors duration-200">+47 52 86 93 00</a>
+        <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+           class="nav-cta label-caps border border-white/40 text-white px-5 py-2.5 transition-all duration-300 hover:bg-white/10">
+          Bestill opphold
+        </a>
+      </div>
+
+      <!-- Hamburger -->
+      <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2 z-[101]" aria-label="Toggle menu" aria-expanded="false">
+        <span class="menu-bar block w-6 h-px bg-white transition-all duration-300"></span>
+        <span class="menu-bar block w-6 h-px bg-white transition-all duration-300"></span>
+        <span class="menu-bar block w-4 h-px bg-white transition-all duration-300 self-end"></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobilmeny">
+    <button id="menu-close" class="absolute top-7 right-8 text-white/60 hover:text-white text-3xl leading-none" aria-label="Lukk meny">&times;</button>
+    <a href="#rooms"       onclick="closeMobileMenu()">Rom</a>
+    <a href="#dining"      onclick="closeMobileMenu()">Spisesteder</a>
+    <a href="#conferences" onclick="closeMobileMenu()">Konferanse</a>
+    <a href="#wellness"    onclick="closeMobileMenu()">Opplevelser</a>
+    <a href="#destination" onclick="closeMobileMenu()">Destinasjon</a>
+    <a href="https://www.strawberryhotels.com" target="_blank" class="menu-cta">Bestill opphold</a>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero — Waterfront hotel overview">
+
+    <!-- Parallax image -->
+    <img
+      id="hero-img"
+      src="https://hotelmaritim.no/content/uploads/2023/11/QHM-fasade-6-e1699565603747.jpg"
+      alt="Quality Hotel Maritim fasade ved Smedasundet, Haugesund"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <!-- Gradient overlay -->
+    <div id="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div id="hero-content" class="max-w-screen-2xl mx-auto">
+      <div class="max-w-3xl">
+
+        <!-- Label -->
+        <div class="flex items-center gap-4 mb-8" id="hero-label">
+          <span class="divider-line" aria-hidden="true"></span>
+          <span class="label-caps text-white/60">Haugesund, Norge · Ved Smedasundet</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-serif text-white leading-tight mb-6" id="hero-headline"
+            style="font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 400;">
+          Gjestfrihet<br>
+          <em style="font-style:italic; font-weight:400;">ved vannet</em> — i<br>
+          hjertet av Haugesund
+        </h1>
+
+        <!-- Subline -->
+        <p class="text-white/70 mb-10 max-w-md leading-relaxed" id="hero-sub"
+           style="font-size: clamp(0.9rem, 1.4vw, 1.05rem); font-weight: 300;">
+          311 rom og suiter på Smedasundet. Et naturlig utgangspunkt for fjordene, kysten og kulturen på Vestlandet.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4" id="hero-ctas">
+          <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="btn-primary">
+            Bestill rom
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#story" class="btn-ghost">
+            Utforsk hotellet
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 right-8 hidden md:flex flex-col items-center gap-3" aria-hidden="true">
+        <span class="label-caps text-white/40" style="writing-mode: vertical-lr; letter-spacing: 0.2em; font-size: 0.6rem;">Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       STORY / INTRO
+  ══════════════════════════════════════════════════ -->
+  <section id="story" aria-label="Hotel story and location" class="section-pad bg-linen">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Top label row -->
+      <div class="flex items-center gap-4 mb-16 reveal">
+        <span class="divider-line" aria-hidden="true"></span>
+        <span class="label-caps text-fjord">Vår historie</span>
+      </div>
+
+      <!-- Two-column grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+        <!-- Left: Editorial text -->
+        <div>
+          <h2 class="font-serif text-navy mb-8 reveal"
+              style="font-size: clamp(2rem, 3.8vw, 3.4rem); font-weight: 400; line-height: 1.2;">
+            Et landemerke på<br>
+            <em>Smedasundet</em>
+          </h2>
+
+          <p class="text-charcoal/80 leading-relaxed mb-6 reveal" style="font-size: 1.05rem; font-weight: 300;">
+            Med beliggenhet direkte ved Smedasundet har Quality Hotel Maritim lenge vært møtestedet mellom sjø og by i Haugesund. Havnen er rett utenfor døren. Gamlebyen er en kort spasertur unna. Fjordene begynner rett bak horisonten.
+          </p>
+
+          <p class="text-charcoal/80 leading-relaxed mb-10 reveal" style="font-size: 1.05rem; font-weight: 300;">
+            Enten du kommer for konferanse, kulturfestival eller bare for å tilbringe tid ved vannet — Maritim er der Haugesund samles. 311 rom og suiter, flere restauranter og barer, en prisbelønnet frokostbuffet, og flytende badstuer som gynger stille på fjorden.
+          </p>
+
+          <!-- Three stat pillars -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-sand reveal">
+            <div>
+              <p class="font-serif text-navy mb-1" style="font-size: 2.2rem; font-weight: 400;">311</p>
+              <p class="label-caps text-muted">Rom og suiter</p>
+            </div>
+            <div>
+              <p class="font-serif text-navy mb-1" style="font-size: 2.2rem; font-weight: 400;">4</p>
+              <p class="label-caps text-muted">Restauranter og barer</p>
+            </div>
+            <div>
+              <p class="font-serif text-navy mb-1" style="font-size: 2.2rem; font-weight: 400;">20+</p>
+              <p class="label-caps text-muted">Arrangementslokaler</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Image stack -->
+        <div class="relative h-[520px] lg:h-[600px]">
+
+          <!-- Large back image -->
+          <div class="absolute top-0 right-0 w-[88%] h-[88%] overflow-hidden reveal-right">
+            <img
+              src="https://hotelmaritim.no/content/uploads/2022/10/Quality-AHG_5924_resized_1-scaled-e1666035952210.jpg"
+              alt="Quality Hotel Maritim ved Smedasundet, Haugesund"
+              loading="lazy"
+              class="w-full h-full object-cover"
+              style="transition: transform 0.6s ease;"
+              onmouseover="this.style.transform='scale(1.04)'"
+              onmouseout="this.style.transform='scale(1)'"
+            />
+          </div>
+
+          <!-- Small front image -->
+          <div class="absolute bottom-0 left-0 w-[52%] h-[44%] overflow-hidden shadow-2xl reveal" style="transition-delay: 0.2s;">
+            <img
+              src="https://hotelmaritim.no/content/uploads/2025/08/Quality-Hotel-Maritim-forsidebilde-–-2-1120x365.jpg"
+              alt="Hotellet sett fra Smedasundet"
+              loading="lazy"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Floating caption card -->
+          <div class="absolute bottom-[44%] right-0 translate-y-1/2 bg-navy text-white px-5 py-4 reveal" style="max-width: 180px; transition-delay: 0.35s;">
+            <p class="font-serif italic text-white/90 leading-snug" style="font-size: 0.9rem;">«Der byen møter havet.»</p>
+            <span class="label-caps text-fjord mt-2 block" style="font-size:0.58rem;">Haugesund</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Full-width pull quote -->
+      <div class="mt-24 pt-16 border-t border-sand text-center reveal">
+        <p class="font-bask italic text-navy/70 mx-auto"
+           style="font-size: clamp(1.1rem, 2vw, 1.5rem); max-width: 680px; line-height: 1.7;">
+          «Herfra folder skjærgården seg ut — øyer, skjær og åpent hav. Haugesund er ikke bare et reisemål; det er et utgangspunkt.»
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       ROOMS & SUITES
+  ══════════════════════════════════════════════════ -->
+  <section id="rooms" aria-label="Rooms and Suites" class="section-pad" style="background:#EFE9E1;">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Section header -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-16">
+        <div>
+          <div class="flex items-center gap-4 mb-6 reveal">
+            <span class="divider-line" aria-hidden="true"></span>
+            <span class="label-caps text-fjord">Rom og suiter</span>
+          </div>
+          <h2 class="font-serif text-navy reveal"
+              style="font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 400; line-height: 1.2;">
+            311 rom.<br><em>Alle ved vannet.</em>
+          </h2>
+        </div>
+        <div class="reveal">
+          <p class="text-charcoal/70 leading-relaxed" style="font-size:1.02rem; font-weight:300;">
+            Fra standard rom med havneglimt til panoramasuiter med sjøutsikt — hvert rom er skapt for stillferdig komfort, naturlige materialer og lyden av vann i nærheten.
+          </p>
+        </div>
+      </div>
+
+      <!-- Primary featured room — full width -->
+      <div class="relative overflow-hidden mb-4 reveal-scale" style="height: clamp(320px, 50vw, 560px);">
+        <img
+          src="https://hotelmaritim.no/content/uploads/2018/02/Hotelmaritim-rom-suite-3.jpg"
+          alt="Suite ved Smedasundet med panoramautsikt over havnen"
+          loading="lazy"
+          class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+        />
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,43,58,0.65) 0%, transparent 55%);"></div>
+        <div class="absolute bottom-0 left-0 p-8 lg:p-12">
+          <span class="label-caps text-fjord block mb-2">Utvalgt</span>
+          <h3 class="font-serif text-white mb-2" style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight:400;">Waterfront-suite</h3>
+          <p class="text-white/70 mb-5 max-w-sm" style="font-size:0.92rem; font-weight:300;">Gulv-til-tak glass mot Smedasundet. Privat balkong, sittegruppe og uforstyrret utsikt over havnelysene i skumringen.</p>
+          <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.72rem;">Reserver suiten</a>
+        </div>
+        <!-- Tag -->
+        <div class="absolute top-6 right-6 bg-navy/80 backdrop-blur-sm text-white px-4 py-2">
+          <span class="label-caps" style="font-size:0.6rem;">Sjøutsikt · Balkong</span>
+        </div>
+      </div>
+
+      <!-- Three-column room grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+
+        <!-- Room card 1 -->
+        <div class="room-card group relative overflow-hidden reveal" style="height:340px; transition-delay:0s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/02/Scandic-Maritim-Superior-Rom.jpg"
+            alt="Superior dobbeltrom med havutsikt"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          />
+          <div class="absolute inset-0 transition-opacity duration-300" style="background: linear-gradient(to top, rgba(28,43,58,0.7) 0%, transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps text-fjord block mb-1" style="font-size:0.58rem;">Superior</span>
+            <h3 class="font-serif text-white mb-1" style="font-size:1.15rem; font-weight:400;">Superior rom</h3>
+            <p class="text-white/60 text-xs font-light">Fra kr 1 390 / natt</p>
+          </div>
+          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+               class="label-caps bg-white text-navy px-3 py-2 text-xs hover:bg-linen transition-colors">Bestill</a>
+          </div>
+        </div>
+
+        <!-- Room card 2 -->
+        <div class="room-card group relative overflow-hidden reveal" style="height:340px; transition-delay:0.1s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2022/06/QH-Maritim-medium-family-rom-beds-1.jpg"
+            alt="Familierom med moderne innredning"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,43,58,0.7) 0%, transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps text-fjord block mb-1" style="font-size:0.58rem;">Familie</span>
+            <h3 class="font-serif text-white mb-1" style="font-size:1.15rem; font-weight:400;">Familierom</h3>
+            <p class="text-white/60 text-xs font-light">Opptil 4 gjester</p>
+          </div>
+          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+               class="label-caps bg-white text-navy px-3 py-2 text-xs hover:bg-linen transition-colors">Bestill</a>
+          </div>
+        </div>
+
+        <!-- Room card 3 -->
+        <div class="room-card group relative overflow-hidden reveal" style="height:340px; transition-delay:0.2s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/02/QH-Maritim-standard-double-room-city-view.jpg"
+            alt="Standard dobbeltrom med byutsikt"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,43,58,0.7) 0%, transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps text-fjord block mb-1" style="font-size:0.58rem;">Standard</span>
+            <h3 class="font-serif text-white mb-1" style="font-size:1.15rem; font-weight:400;">Standard dobbeltrom</h3>
+            <p class="text-white/60 text-xs font-light">Stille og velinnredet komfort</p>
+          </div>
+          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+               class="label-caps bg-white text-navy px-3 py-2 text-xs hover:bg-linen transition-colors">Bestill</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Two-column bottom row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Card 4: Junior Suite -->
+        <div class="room-card group relative overflow-hidden reveal" style="height:280px; transition-delay:0.05s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/02/QH-Maritim-junior-suite-seng.jpg"
+            alt="Junior suite med stue og sjøutsikt"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,43,58,0.7) 0%, transparent 55%);"></div>
+          <div class="absolute bottom-0 left-0 p-6 flex items-end justify-between w-full">
+            <div>
+              <span class="label-caps text-fjord block mb-1" style="font-size:0.58rem;">Junior suite</span>
+              <h3 class="font-serif text-white" style="font-size:1.15rem; font-weight:400;">Smedasundet-suite</h3>
+            </div>
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+               class="label-caps border border-white/40 text-white px-3 py-2 text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10">Bestill</a>
+          </div>
+        </div>
+
+        <!-- Card 5: Deluxe -->
+        <div class="room-card group relative overflow-hidden reveal" style="height:280px; transition-delay:0.15s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/02/Deluxe-room-double-bed-sofa-quality-hotel-maritim.jpg"
+            alt="Deluxe dobbeltrom med sofagruppe"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,43,58,0.7) 0%, transparent 55%);"></div>
+          <div class="absolute bottom-0 left-0 p-6 flex items-end justify-between w-full">
+            <div>
+              <span class="label-caps text-fjord block mb-1" style="font-size:0.58rem;">Deluxe</span>
+              <h3 class="font-serif text-white" style="font-size:1.15rem; font-weight:400;">Deluxe dobbeltrom</h3>
+            </div>
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener"
+               class="label-caps border border-white/40 text-white px-3 py-2 text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10">Bestill</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="mt-14 flex justify-center reveal">
+        <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="btn-dark">
+          Se alle rom og priser
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       DINING EXPERIENCE
+  ══════════════════════════════════════════════════ -->
+  <section id="dining" aria-label="Dining and restaurants" class="section-pad bg-navy" style="color:#F8F5F0;">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Section header -->
+      <div class="flex items-center gap-4 mb-6 reveal">
+        <span class="divider-line" style="background:#8BA7B5;" aria-hidden="true"></span>
+        <span class="label-caps" style="color:#8BA7B5;">Mat og drikke</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-20">
+        <h2 class="font-serif reveal" style="font-size:clamp(2rem,3.6vw,3.2rem); font-weight:400; line-height:1.2; color:#F8F5F0;">
+          Nordisk smak,<br><em>havnelys.</em>
+        </h2>
+        <p class="reveal" style="font-size:1.02rem; font-weight:300; color:rgba(248,245,240,0.65); line-height:1.75;">
+          Fra tidlig frokost ved vannet til sene kveldscocktails på kaia — våre restauranter og barer formes av årstidene, havet og råvarene fra Vestlandet.
+        </p>
+      </div>
+
+      <!-- Main dining layout: large feature + sidebar -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-4">
+
+        <!-- Feature restaurant — 3 cols -->
+        <div class="lg:col-span-3 relative overflow-hidden group reveal-scale" style="height:clamp(360px,45vw,520px);">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2025/08/maritim_010-scaled-e1754648994854.jpg"
+            alt="Naustet Restaurant — nordisk sjømatmiddag ved vannet"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,18,28,0.82) 0%,rgba(10,18,28,0.1) 60%);"></div>
+          <div class="absolute bottom-0 left-0 p-8 lg:p-10">
+            <span class="label-caps block mb-3" style="color:#8BA7B5; font-size:0.6rem;">Signaturrestaurant</span>
+            <h3 class="font-serif mb-3" style="font-size:clamp(1.4rem,2.4vw,2rem); font-weight:400; color:#F8F5F0;">Naustet Restaurant</h3>
+            <p style="font-size:0.92rem; font-weight:300; color:rgba(248,245,240,0.65); max-width:380px; line-height:1.65; margin-bottom:1.5rem;">
+              Oppkalt etter det tradisjonelle norske naustet serverer Naustet lokalt fanget sjømat og nordiske sesongmenyer i omgivelser som åpner seg direkte mot Smedasundet.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span class="label-caps border px-3 py-1.5" style="border-color:rgba(139,167,181,0.35); color:#8BA7B5; font-size:0.58rem;">Sjømat</span>
+              <span class="label-caps border px-3 py-1.5" style="border-color:rgba(139,167,181,0.35); color:#8BA7B5; font-size:0.58rem;">Nordisk kjøkken</span>
+              <span class="label-caps border px-3 py-1.5" style="border-color:rgba(139,167,181,0.35); color:#8BA7B5; font-size:0.58rem;">Utsikt mot vannet</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two stacked cards — 2 cols -->
+        <div class="lg:col-span-2 flex flex-col gap-4">
+
+          <!-- Card: Café / Bar -->
+          <div class="relative overflow-hidden group reveal" style="flex:1; min-height:220px;">
+            <img
+              src="https://hotelmaritim.no/content/uploads/2022/08/Gallionen-2016-Sjomatbuffet-2-Vincent-klippet.jpg"
+              alt="Gallionen restaurant og bar"
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+            />
+            <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,18,28,0.78) 0%,transparent 55%);"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.58rem;">Kafé og bar</span>
+              <h3 class="font-serif" style="font-size:1.1rem; font-weight:400; color:#F8F5F0;">RENÉ mat og drikke</h3>
+              <p style="font-size:0.82rem; font-weight:300; color:rgba(248,245,240,0.55); margin-top:0.25rem;">Heldag-servering, kaffe og kveldscocktails.</p>
+            </div>
+          </div>
+
+          <!-- Card: Breakfast -->
+          <div class="relative overflow-hidden group reveal" style="flex:1; min-height:220px; transition-delay:0.12s;">
+            <img
+              src="https://hotelmaritim.no/content/uploads/2018/02/Hotelmaritim-restaurant-og-bar-gallionen-sondagsbuffet-.jpg"
+              alt="Prisbelønnet frokostbuffet på Quality Hotel Maritim"
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+            />
+            <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,18,28,0.78) 0%,transparent 55%);"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <span class="label-caps block mb-1" style="color:#D4C4A8; font-size:0.58rem;">Prisbelønnet</span>
+              <h3 class="font-serif" style="font-size:1.1rem; font-weight:400; color:#F8F5F0;">Frokostbuffet</h3>
+              <p style="font-size:0.82rem; font-weight:300; color:rgba(248,245,240,0.55); margin-top:0.25rem;">Kåret til en av Norges beste hotellfroster.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Horizontal dining detail strip -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mt-4" style="border:1px solid rgba(139,167,181,0.15);">
+        <div class="p-8 reveal" style="border-right:1px solid rgba(139,167,181,0.15);">
+          <p class="font-serif mb-3" style="font-size:1.4rem; color:#D4C4A8; font-weight:400;">07:00 – 11:00</p>
+          <p class="label-caps mb-2" style="color:#8BA7B5; font-size:0.6rem;">Morgen</p>
+          <p style="font-size:0.9rem; font-weight:300; color:rgba(248,245,240,0.55); line-height:1.65;">Start dagen med vår berømte frokostbuffet — røkt fisk, håndverksoster, nystekte brød og norske spesialiteter.</p>
+        </div>
+        <div class="p-8 reveal" style="border-right:1px solid rgba(139,167,181,0.15); transition-delay:0.1s;">
+          <p class="font-serif mb-3" style="font-size:1.4rem; color:#D4C4A8; font-weight:400;">12:00 – 22:00</p>
+          <p class="label-caps mb-2" style="color:#8BA7B5; font-size:0.6rem;">Lunsj og middag</p>
+          <p style="font-size:0.9rem; font-weight:300; color:rgba(248,245,240,0.55); line-height:1.65;">Naustet serverer en skiftende sesongmeny med fokus på lokale råvarer fra land og hav.</p>
+        </div>
+        <div class="p-8 reveal" style="transition-delay:0.2s;">
+          <p class="font-serif mb-3" style="font-size:1.4rem; color:#D4C4A8; font-weight:400;">Hele dagen</p>
+          <p class="label-caps mb-2" style="color:#8BA7B5; font-size:0.6rem;">Bar og lounge</p>
+          <p style="font-size:0.9rem; font-weight:300; color:rgba(248,245,240,0.55); line-height:1.65;">RENÉ går fra morgenkaffi til kveldscocktails — med terrasse mot havnen når været tillater det.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CONFERENCE & EVENTS
+  ══════════════════════════════════════════════════ -->
+  <section id="conferences" aria-label="Conference and event facilities" class="section-pad bg-linen">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Header -->
+      <div class="flex items-center gap-4 mb-6 reveal">
+        <span class="divider-line" aria-hidden="true"></span>
+        <span class="label-caps text-fjord">Kurs og konferanse</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-20">
+        <h2 class="font-serif text-navy reveal"
+            style="font-size:clamp(2rem,3.6vw,3.2rem); font-weight:400; line-height:1.2;">
+          Der store ideer<br><em>finner sin plass.</em>
+        </h2>
+        <p class="text-charcoal/70 leading-relaxed reveal" style="font-size:1.02rem; font-weight:300;">
+          Et av de største konferansehotellene i Haugesundregionen — Maritim tilbyr 20+ møterom, fra intime styrerom til fullstorte plenumsaler. Beliggenheten ved vannet gjør ethvert arrangement minneverdig.
+        </p>
+      </div>
+
+      <!-- Capacity stats bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px mb-16 reveal" style="border:1px solid #D4C4A8;">
+        <div class="bg-white p-7 text-center">
+          <p class="font-serif text-navy mb-1" style="font-size:2.4rem; font-weight:400;">1 200</p>
+          <p class="label-caps text-muted" style="font-size:0.62rem;">Maks kapasitet</p>
+        </div>
+        <div class="bg-white p-7 text-center" style="border-left:1px solid #D4C4A8;">
+          <p class="font-serif text-navy mb-1" style="font-size:2.4rem; font-weight:400;">20+</p>
+          <p class="label-caps text-muted" style="font-size:0.62rem;">Møterom</p>
+        </div>
+        <div class="bg-white p-7 text-center" style="border-left:1px solid #D4C4A8;">
+          <p class="font-serif text-navy mb-1" style="font-size:2.4rem; font-weight:400;">3 000 m²</p>
+          <p class="label-caps text-muted" style="font-size:0.62rem;">Arrangementareal</p>
+        </div>
+        <div class="bg-white p-7 text-center" style="border-left:1px solid #D4C4A8;">
+          <p class="font-serif text-navy mb-1" style="font-size:2.4rem; font-weight:400;">311</p>
+          <p class="label-caps text-muted" style="font-size:0.62rem;">Hotelrom</p>
+        </div>
+      </div>
+
+      <!-- Main image + text split -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
+
+        <!-- Image block -->
+        <div class="relative overflow-hidden reveal-left" style="height:clamp(300px,38vw,480px);">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2024/07/Artboard-–-9-scaled.jpg"
+            alt="Moderne konferansesal på Quality Hotel Maritim"
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+          <!-- Corner accent -->
+          <div class="absolute top-0 left-0 w-16 h-16" style="border-top:2px solid #8BA7B5; border-left:2px solid #8BA7B5;"></div>
+          <div class="absolute bottom-0 right-0 w-16 h-16" style="border-bottom:2px solid #8BA7B5; border-right:2px solid #8BA7B5;"></div>
+        </div>
+
+        <!-- Text block -->
+        <div class="reveal-right">
+          <h3 class="font-serif text-navy mb-5" style="font-size:clamp(1.4rem,2.2vw,1.9rem); font-weight:400; line-height:1.3;">
+            Alt du trenger,<br>intet du ikke trenger.
+          </h3>
+          <p class="text-charcoal/70 mb-6 leading-relaxed" style="font-size:0.98rem; font-weight:300;">
+            Arrangementsteamet vårt håndterer logistikk, catering og oppsett — så du kan fokusere på dagsorden. Alle rom har moderne AV-utstyr, høyhastighets internett og fleksible møblingsløsninger.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3 text-charcoal/70" style="font-size:0.92rem; font-weight:300;">
+              <span class="mt-1.5 shrink-0 w-4 h-px inline-block" style="background:#8BA7B5;"></span>
+              Plenumsaler for opptil 1 200 deltakere
+            </li>
+            <li class="flex items-start gap-3 text-charcoal/70" style="font-size:0.92rem; font-weight:300;">
+              <span class="mt-1.5 shrink-0 w-4 h-px inline-block" style="background:#8BA7B5;"></span>
+              Grupperom og styrerom i alle størrelser
+            </li>
+            <li class="flex items-start gap-3 text-charcoal/70" style="font-size:0.92rem; font-weight:300;">
+              <span class="mt-1.5 shrink-0 w-4 h-px inline-block" style="background:#8BA7B5;"></span>
+              Profesjonelt AV-utstyr, lys og scene
+            </li>
+            <li class="flex items-start gap-3 text-charcoal/70" style="font-size:0.92rem; font-weight:300;">
+              <span class="mt-1.5 shrink-0 w-4 h-px inline-block" style="background:#8BA7B5;"></span>
+              Catering — fra arbeidslunsj til gallamiddag
+            </li>
+            <li class="flex items-start gap-3 text-charcoal/70" style="font-size:0.92rem; font-weight:300;">
+              <span class="mt-1.5 shrink-0 w-4 h-px inline-block" style="background:#8BA7B5;"></span>
+              Dedikert arrangementkoordinator for hvert oppdrag
+            </li>
+          </ul>
+          <a href="mailto:konferanse@hotelmaritim.no" class="btn-dark">
+            Be om tilbud
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Event type cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <div class="relative overflow-hidden group reveal" style="height:280px; transition-delay:0s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/04/bh250903_Sjofartsdir_Maritim481.jpg"
+            alt="Kurs og konferanse på Maritim"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.72) 0%,transparent 55%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.58rem;">Bedrift</span>
+            <h4 class="font-serif text-white" style="font-size:1.1rem; font-weight:400;">Konferanser og seminarer</h4>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden group reveal" style="height:280px; transition-delay:0.1s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2018/02/Bryllup-3.jpg"
+            alt="Bryllup og selskap på Quality Hotel Maritim"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.72) 0%,transparent 55%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps block mb-1" style="color:#D4C4A8; font-size:0.58rem;">Selskaper</span>
+            <h4 class="font-serif text-white" style="font-size:1.1rem; font-weight:400;">Bryllup og private arrangement</h4>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden group reveal" style="height:280px; transition-delay:0.2s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2022/08/brovingen-selskapslokale-table-setting-quality-hotel-maritim.-1.jpg"
+            alt="Gallamiddag og prisutdeling på Brovingen"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.72) 0%,transparent 55%);"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.58rem;">Galla og priser</span>
+            <h4 class="font-serif text-white" style="font-size:1.1rem; font-weight:400;">Middager og prisutdelinger</h4>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       WELLNESS & EXPERIENCES
+  ══════════════════════════════════════════════════ -->
+  <section id="wellness" aria-label="Wellness and experiences" class="relative overflow-hidden" style="background:#1C2B3A;">
+
+    <!-- Full-bleed background image with parallax -->
+    <div id="wellness-bg" class="absolute inset-0 w-full h-full" style="will-change:transform; height:115%;">
+      <img
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
+        alt="Calm Norwegian fjord water at golden hour"
+        loading="lazy"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(28,43,58,0.55) 0%, rgba(28,43,58,0.75) 100%);"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 section-pad">
+      <div class="max-w-screen-2xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-6 reveal">
+          <span class="divider-line" style="background:#8BA7B5;" aria-hidden="true"></span>
+          <span class="label-caps" style="color:#8BA7B5;">Opplevelser</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-20">
+          <h2 class="font-serif reveal" style="font-size:clamp(2rem,3.6vw,3.2rem); font-weight:400; line-height:1.2; color:#F8F5F0;">
+            Gå ut.<br><em>Fjorden venter.</em>
+          </h2>
+          <p class="reveal" style="font-size:1.02rem; font-weight:300; color:rgba(248,245,240,0.65); line-height:1.75;">
+            Haugesunds kystkarakter oppleves best på vannoverflaten. Våre flytende badstuer på Smedasundet lar deg veksle mellom varme og det kalde, klare havet — en norsk tradisjon like gammel som fjordene selv.
+          </p>
+        </div>
+
+        <!-- Sauna feature — wide card -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+
+          <!-- Main sauna image -->
+          <div class="relative overflow-hidden group reveal-scale" style="height:clamp(280px,36vw,440px);">
+            <img
+              src="https://hotelmaritim.no/content/uploads/2025/05/Maritim-badstuer-mai-2025.jpg"
+              alt="Flytende badstuer på Smedasundet, Haugesund"
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+            <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.7) 0%,transparent 55%);"></div>
+            <div class="absolute bottom-0 left-0 p-8">
+              <span class="label-caps block mb-2" style="color:#8BA7B5; font-size:0.6rem;">Signaturopplevelse</span>
+              <h3 class="font-serif" style="font-size:clamp(1.3rem,2.2vw,1.8rem); font-weight:400; color:#F8F5F0; margin-bottom:0.6rem;">Flytende badstuer</h3>
+              <p style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.65); max-width:340px; line-height:1.6;">Drift stille på Smedasundet i en tradisjonell vedfyrt badstue. Hopp i fjorden. Gjenta. Et dypt norsk ritual, noen skritt fra rommet ditt.</p>
+            </div>
+            <!-- Temperature badge -->
+            <div class="absolute top-6 right-6 text-center px-4 py-3" style="background:rgba(28,43,58,0.7); backdrop-filter:blur(8px); border:1px solid rgba(139,167,181,0.3);">
+              <p class="font-serif" style="font-size:1.5rem; color:#F8F5F0; font-weight:400;">80°C</p>
+              <span class="label-caps" style="font-size:0.55rem; color:#8BA7B5;">Badstuetemperatur</span>
+            </div>
+          </div>
+
+          <!-- Experience cards column -->
+          <div class="flex flex-col gap-4">
+
+            <div class="relative overflow-hidden group reveal" style="flex:1; min-height:140px;">
+              <img
+                src="https://hotelmaritim.no/content/uploads/2024/12/1200x630-–-13-1024x608.jpg"
+                alt="Tur langs havnen i Haugesund"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                style="min-height:180px;"
+              />
+              <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(28,43,58,0.78) 40%,transparent 100%);"></div>
+              <div class="absolute inset-0 flex items-center p-7">
+                <div>
+                  <span class="label-caps block mb-2" style="color:#8BA7B5; font-size:0.58rem;">Rett utenfor døren</span>
+                  <h4 class="font-serif" style="font-size:1.1rem; font-weight:400; color:#F8F5F0;">Havn- og kystvandriger</h4>
+                  <p style="font-size:0.82rem; font-weight:300; color:rgba(248,245,240,0.55); margin-top:0.3rem;">Spaser langs Smedasundet, utforsk gamlebyen eller ta fergen til nærliggende øyer.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative overflow-hidden group reveal" style="flex:1; min-height:140px; transition-delay:0.1s;">
+              <img
+                src="https://hotelmaritim.no/content/uploads/2024/12/1200x630-–-12-1024x538.jpg"
+                alt="Fjord- og øyutflukter fra Haugesund"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                style="min-height:180px;"
+              />
+              <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(28,43,58,0.78) 40%,transparent 100%);"></div>
+              <div class="absolute inset-0 flex items-center p-7">
+                <div>
+                  <span class="label-caps block mb-2" style="color:#8BA7B5; font-size:0.58rem;">Dagsutflukter</span>
+                  <h4 class="font-serif" style="font-size:1.1rem; font-weight:400; color:#F8F5F0;">Fjord- og øyutflukter</h4>
+                  <p style="font-size:0.82rem; font-weight:300; color:rgba(248,245,240,0.55); margin-top:0.3rem;">Oppdag skjærgården — skjær, åpent hav og utsikt som strekker seg mot horisonten.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative overflow-hidden group reveal" style="flex:1; min-height:140px; transition-delay:0.2s;">
+              <img
+                src="https://hotelmaritim.no/content/uploads/2024/01/17.-mai-Maritim-2025-51.jpg"
+                alt="Kultur og festivaler i Haugesund"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                style="min-height:180px;"
+              />
+              <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(28,43,58,0.78) 40%,transparent 100%);"></div>
+              <div class="absolute inset-0 flex items-center p-7">
+                <div>
+                  <span class="label-caps block mb-2" style="color:#D4C4A8; font-size:0.58rem;">Kultur og arrangement</span>
+                  <h4 class="font-serif" style="font-size:1.1rem; font-weight:400; color:#F8F5F0;">Filmfestival og Sildajazz</h4>
+                  <p style="font-size:0.82rem; font-weight:300; color:rgba(248,245,240,0.55); margin-top:0.3rem;">Haugesund er vertskap for verdensklassefestivaler året rundt — du er alltid i sentrum av det.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       DESTINATION: HAUGESUND
+  ══════════════════════════════════════════════════ -->
+  <section id="destination" aria-label="Destination Haugesund and Fjord Norway" class="section-pad bg-linen">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Header -->
+      <div class="flex items-center gap-4 mb-6 reveal">
+        <span class="divider-line" aria-hidden="true"></span>
+        <span class="label-caps text-fjord">Destinasjon</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-6">
+        <h2 class="font-serif text-navy reveal"
+            style="font-size:clamp(2rem,3.6vw,3.2rem); font-weight:400; line-height:1.2;">
+          Haugesund.<br><em>Der Norge begynner.</em>
+        </h2>
+        <p class="text-charcoal/70 leading-relaxed reveal" style="font-size:1.02rem; font-weight:300;">
+          Mellom det åpne Nordsjøen og de indre fjordene ligger Haugesund i et landskap som har formet norsk kultur i over tusen år. Vikingarv, en levende kunstscene og noe av Europas mest dramatiske kystlandskap — alt innen rekkevidde fra hotellet.
+        </p>
+      </div>
+
+      <!-- Full-width cinematic image with text overlay -->
+      <div class="relative overflow-hidden mb-4 reveal-scale" style="height:clamp(300px,45vw,540px);">
+        <img
+          src="https://hotelmaritim.no/content/uploads/2022/10/Quality-AHG_5924_resized_1-scaled-e1666035952210.jpg"
+          alt="Quality Hotel Maritim ved Smedasundet, Haugesund"
+          loading="lazy"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0" style="background:linear-gradient(135deg, rgba(28,43,58,0.65) 0%, rgba(28,43,58,0.1) 60%);"></div>
+        <!-- Floating text card -->
+        <div class="absolute top-1/2 left-8 lg:left-16 -translate-y-1/2" style="max-width:400px;">
+          <p class="font-bask italic text-white/90 leading-relaxed" style="font-size:clamp(1rem,1.8vw,1.35rem);">
+            «Fra disse strendene seilte vikingene ut over Nordatlanteren. I dag spiller det samme lyset på det samme vannet.»
+          </p>
+          <span class="label-caps text-fjord mt-4 block" style="font-size:0.6rem;">Haugaland, Vestlandet</span>
+        </div>
+      </div>
+
+      <!-- 4-column destination highlights grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+
+        <div class="group relative overflow-hidden reveal" style="height:320px; transition-delay:0s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2024/04/17.-mai-Maritim-2025-165.jpg"
+            alt="Vikinghistorie nær Haugesund"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.78) 0%,transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-5">
+            <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.56rem;">Historie</span>
+            <h4 class="font-serif text-white" style="font-size:1rem; font-weight:400;">Vikinghistorie</h4>
+            <p class="text-white/55 mt-1" style="font-size:0.78rem; font-weight:300;">Avaldsnes — Norges eldste kongesete, minutter fra byen.</p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden reveal" style="height:320px; transition-delay:0.08s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2025/02/IMG_6083.jpg"
+            alt="Norsk filmfestival i Haugesund"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.78) 0%,transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-5">
+            <span class="label-caps block mb-1" style="color:#D4C4A8; font-size:0.56rem;">Kultur</span>
+            <h4 class="font-serif text-white" style="font-size:1rem; font-weight:400;">Filmfestival og Sildajazz</h4>
+            <p class="text-white/55 mt-1" style="font-size:0.78rem; font-weight:300;">Verdensklassefestivaler hver sommer i hjertet av byen.</p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden reveal" style="height:320px; transition-delay:0.16s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2024/10/IMG_6435-2.jpg"
+            alt="Norsk fjord- og øylandskap"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.78) 0%,transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-5">
+            <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.56rem;">Natur</span>
+            <h4 class="font-serif text-white" style="font-size:1rem; font-weight:400;">Fjorder og øyer</h4>
+            <p class="text-white/55 mt-1" style="font-size:0.78rem; font-weight:300;">Uendelig skjærgård — med båt, kajak eller til fots langs kysten.</p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden reveal" style="height:320px; transition-delay:0.24s;">
+          <img
+            src="https://hotelmaritim.no/content/uploads/2024/06/IMG_20240301_141716.jpg"
+            alt="Ironman Haugesund triathlon"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,43,58,0.78) 0%,transparent 50%);"></div>
+          <div class="absolute bottom-0 left-0 p-5">
+            <span class="label-caps block mb-1" style="color:#8BA7B5; font-size:0.56rem;">Sport</span>
+            <h4 class="font-serif text-white" style="font-size:1rem; font-weight:400;">Ironman Haugesund</h4>
+            <p class="text-white/55 mt-1" style="font-size:0.78rem; font-weight:300;">Et av Norges mest kjente triatlonarrangement, her på kysten.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Destination detail strip — horizontal facts -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-sand">
+        <div class="reveal">
+          <span class="label-caps text-fjord block mb-3" style="font-size:0.62rem;">Slik kommer du hit</span>
+          <h4 class="font-serif text-navy mb-3" style="font-size:1.15rem; font-weight:400;">Haugesund lufthavn</h4>
+          <p class="text-charcoal/65 leading-relaxed" style="font-size:0.9rem; font-weight:300;">Direktefly fra Oslo, Bergen og Stavanger. 15 minutter fra hotellet med taxi. Europeiske forbindelser via Amsterdam og London.</p>
+        </div>
+        <div class="reveal" style="transition-delay:0.1s;">
+          <span class="label-caps text-fjord block mb-3" style="font-size:0.62rem;">Sjøveien</span>
+          <h4 class="font-serif text-navy mb-3" style="font-size:1.15rem; font-weight:400;">Kystforbindelser</h4>
+          <p class="text-charcoal/65 leading-relaxed" style="font-size:0.9rem; font-weight:300;">Fergeforbindelser til Stavanger og omkringliggende øyer. Hotellet har egen gjestebrygge — ankom med privat båt direkte til kaia vår.</p>
+        </div>
+        <div class="reveal" style="transition-delay:0.2s;">
+          <span class="label-caps text-fjord block mb-3" style="font-size:0.62rem;">Utforsk mer</span>
+          <h4 class="font-serif text-navy mb-3" style="font-size:1.15rem; font-weight:400;">Fjord-Norge</h4>
+          <p class="text-charcoal/65 leading-relaxed" style="font-size:0.9rem; font-weight:300;">Haugesund er den sørlige porten til Fjord-Norge — Hardangerfjorden, Lysefjorden og Preikestolen er alle innen en dagsreise.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       GUEST EXPERIENCE / TESTIMONIALS
+  ══════════════════════════════════════════════════ -->
+  <section id="testimonials" aria-label="Guest reviews and testimonials" style="background:#EFE9E1;" class="section-pad">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Header -->
+      <div class="text-center mb-20">
+        <div class="flex items-center justify-center gap-4 mb-6 reveal">
+          <span class="divider-line" aria-hidden="true"></span>
+          <span class="label-caps text-fjord">Gjestenes erfaringer</span>
+          <span class="divider-line" aria-hidden="true"></span>
+        </div>
+        <h2 class="font-serif text-navy reveal" style="font-size:clamp(1.8rem,3.2vw,3rem); font-weight:400; line-height:1.2;">
+          Hva gjestene sier.
+        </h2>
+      </div>
+
+      <!-- Star rating bar -->
+      <div class="flex flex-wrap justify-center gap-12 mb-20 reveal">
+        <div class="text-center">
+          <p class="font-serif text-navy" style="font-size:3rem; font-weight:400; line-height:1;">8.4</p>
+          <div class="flex gap-1 justify-center my-2" aria-label="4 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#8BA7B5" stroke-width="1" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <p class="label-caps text-muted" style="font-size:0.6rem;">Booking.com</p>
+        </div>
+        <div class="w-px" style="background:#D4C4A8;"></div>
+        <div class="text-center">
+          <p class="font-serif text-navy" style="font-size:3rem; font-weight:400; line-height:1;">4.0</p>
+          <div class="flex gap-1 justify-center my-2" aria-label="4 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#8BA7B5" stroke-width="1" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <p class="label-caps text-muted" style="font-size:0.6rem;">TripAdvisor</p>
+        </div>
+        <div class="w-px" style="background:#D4C4A8;"></div>
+        <div class="text-center">
+          <p class="font-serif text-navy" style="font-size:3rem; font-weight:400; line-height:1;">8.6</p>
+          <div class="flex gap-1 justify-center my-2" aria-label="4 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <p class="label-caps text-muted" style="font-size:0.6rem;">Hotels.com</p>
+        </div>
+      </div>
+
+      <!-- Featured large quote -->
+      <div class="text-center mb-16 reveal" style="max-width:740px; margin-left:auto; margin-right:auto;">
+        <p class="font-bask italic text-navy" style="font-size:clamp(1.15rem,2.2vw,1.6rem); line-height:1.7; margin-bottom:1.5rem;">
+          «Fantastisk frokost og den vakreste sjøfrontplasseringen. Vi så båtene komme inn fra rommet vårt hver morgen — det finnes ingen bedre måte å våkne opp i Norge.»
+        </p>
+        <div class="flex items-center justify-center gap-3">
+          <span class="divider-line" style="width:24px;" aria-hidden="true"></span>
+          <span class="label-caps text-muted" style="font-size:0.62rem;">Sophie &amp; Erik — Oslo, via Booking.com</span>
+          <span class="divider-line" style="width:24px;" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- Three-column testimonial cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <article class="bg-white p-8 reveal" style="transition-delay:0s;">
+          <div class="flex gap-1 mb-5" aria-label="5 stars">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <blockquote class="text-charcoal/80 leading-relaxed mb-6 font-bask italic" style="font-size:0.95rem; line-height:1.75;">
+            «Perfekt beliggenhet midt i Haugesund sentrum. Personalet var genuint varmt og hjelpsomt. Badstuen på vannet var høydepunktet — vi gikk dit hver kveld.»
+          </blockquote>
+          <footer class="border-t pt-4" style="border-color:#EFE9E1;">
+            <p class="label-caps text-navy" style="font-size:0.6rem;">Marcus T.</p>
+            <p class="label-caps text-muted" style="font-size:0.56rem; margin-top:2px;">København · TripAdvisor</p>
+          </footer>
+        </article>
+
+        <article class="bg-white p-8 reveal" style="transition-delay:0.1s;">
+          <div class="flex gap-1 mb-5" aria-label="5 stars">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <blockquote class="text-charcoal/80 leading-relaxed mb-6 font-bask italic" style="font-size:0.95rem; line-height:1.75;">
+            «Frokosten er virkelig verdensklasse — røkt laks, lokale oster, ferske bakverk. Vi forlenget oppholdet utelukkende for å nyte det én gang til. Et flott utgangspunkt for å utforske kysten.»
+          </blockquote>
+          <footer class="border-t pt-4" style="border-color:#EFE9E1;">
+            <p class="label-caps text-navy" style="font-size:0.6rem;">Ingrid &amp; Jørn H.</p>
+            <p class="label-caps text-muted" style="font-size:0.56rem; margin-top:2px;">Bergen · Booking.com</p>
+          </footer>
+        </article>
+
+        <article class="bg-white p-8 reveal" style="transition-delay:0.2s;">
+          <div class="flex gap-1 mb-5" aria-label="4 stars">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="#8BA7B5" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#8BA7B5" stroke-width="1" aria-hidden="true"><polygon points="7,1 8.8,5.2 13.5,5.5 10,8.6 11.1,13.2 7,10.7 2.9,13.2 4,8.6 0.5,5.5 5.2,5.2"/></svg>
+          </div>
+          <blockquote class="text-charcoal/80 leading-relaxed mb-6 font-bask italic" style="font-size:0.95rem; line-height:1.75;">
+            «Vi arrangerte vår årlige bedriftskonferanse her — 200 delegater over to dager. Teamet var profesjonelt, fleksibelt, og sjøfrontomgivelsene gjorde hele arrangementet spesielt.»
+          </blockquote>
+          <footer class="border-t pt-4" style="border-color:#EFE9E1;">
+            <p class="label-caps text-navy" style="font-size:0.6rem;">Kristian M., arrangementsdirektør</p>
+            <p class="label-caps text-muted" style="font-size:0.56rem; margin-top:2px;">Stavanger · Google Reviews</p>
+          </footer>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       IMAGE GALLERY
+  ══════════════════════════════════════════════════ -->
+  <section id="gallery" aria-label="Photo gallery" class="section-pad bg-navy">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-16">
+        <div>
+          <div class="flex items-center gap-4 mb-4 reveal">
+            <span class="divider-line" style="background:#8BA7B5;" aria-hidden="true"></span>
+            <span class="label-caps" style="color:#8BA7B5;">Galleri</span>
+          </div>
+          <h2 class="font-serif reveal" style="font-size:clamp(1.8rem,3.2vw,3rem); font-weight:400; color:#F8F5F0; line-height:1.2;">
+            Livet på Maritim.
+          </h2>
+        </div>
+        <p class="hidden md:block reveal" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.45); max-width:240px; text-align:right; line-height:1.6;">
+          Fra kaifront i morgenlyset til havnelys ved midnatt.
+        </p>
+      </div>
+
+      <!-- Masonry-style grid -->
+      <!-- Row 1: 3 cols — tall | short | short stacked -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
+
+        <!-- Tall left -->
+        <div class="gallery-item group relative overflow-hidden reveal-scale md:row-span-2" style="height:clamp(260px,36vw,480px);">
+          <img src="https://hotelmaritim.no/content/uploads/2023/11/QHM-fasade-6-e1699565603747.jpg"
+               alt="Quality Hotel Maritim fasade ved sjøfronten" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Hotellfasade</span>
+          </div>
+        </div>
+
+        <!-- Top right -->
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,232px); transition-delay:0.05s;">
+          <img src="https://hotelmaritim.no/content/uploads/2024/04/17.-mai-Maritim-2025-165.jpg"
+               alt="Smedasundet havn og båter" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Smedasundet havn</span>
+          </div>
+        </div>
+
+        <!-- Top far right -->
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,232px); transition-delay:0.1s;">
+          <img src="https://hotelmaritim.no/content/uploads/2018/02/Scandic-Maritim-Superior-Rom.jpg"
+               alt="Superior rom med utsikt mot havnen" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Sjøfront rom</span>
+          </div>
+        </div>
+
+        <!-- Bottom right (middle col) -->
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,232px); transition-delay:0.08s;">
+          <img src="https://hotelmaritim.no/content/uploads/2025/08/maritim_010-scaled-e1754648994854.jpg"
+               alt="Naustet Restaurant sjømatmiddag" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Naustet Restaurant</span>
+          </div>
+        </div>
+
+        <!-- Bottom far right -->
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,232px); transition-delay:0.14s;">
+          <img src="https://hotelmaritim.no/content/uploads/2018/02/Hotelmaritim-restaurant-og-bar-gallionen-sondagsbuffet-.jpg"
+               alt="Prisvinnende frokostbuffet på Gallionen" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Frokostbuffet</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 2: wide + two small -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
+
+        <div class="gallery-item group relative overflow-hidden col-span-2 reveal-scale" style="height:clamp(180px,22vw,300px);">
+          <img src="https://hotelmaritim.no/content/uploads/2024/07/Artboard-–-9-scaled.jpg"
+               alt="Konferansesal på Quality Hotel Maritim" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Kurs &amp; konferanser</span>
+          </div>
+        </div>
+
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,22vw,300px); transition-delay:0.08s;">
+          <img src="https://hotelmaritim.no/content/uploads/2024/12/1200x630-–-13-1024x608.jpg"
+               alt="Flytende badstue ved Maritim" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Flytende badstue</span>
+          </div>
+        </div>
+
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,22vw,300px); transition-delay:0.16s;">
+          <img src="https://hotelmaritim.no/content/uploads/2024/10/IMG_6435-2.jpg"
+               alt="Fjord-Norge landskap nær Haugesund" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Fjord-Norge</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 3: three equal -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,240px); transition-delay:0s;">
+          <img src="https://hotelmaritim.no/content/uploads/2024/01/17.-mai-Maritim-2025-51.jpg"
+               alt="Haugesund by og sjøfront" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Haugesund by</span>
+          </div>
+        </div>
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,240px); transition-delay:0.09s;">
+          <img src="https://hotelmaritim.no/content/uploads/2018/02/Bryllup-3.jpg"
+               alt="Bryllup og festarrangement på Maritim" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Bryllup og fest</span>
+          </div>
+        </div>
+        <div class="gallery-item group relative overflow-hidden reveal" style="height:clamp(180px,18vw,240px); transition-delay:0.18s;">
+          <img src="https://hotelmaritim.no/content/uploads/2025/02/IMG_6083.jpg"
+               alt="Norsk kystlandskap ved Haugesund" loading="lazy"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+          <div class="gallery-overlay absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="background:linear-gradient(to top,rgba(28,43,58,0.75) 0%,transparent 60%);">
+            <span class="label-caps" style="color:#8BA7B5; font-size:0.56rem;">Kystlandskap</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       LOCATION
+  ══════════════════════════════════════════════════ -->
+  <section id="location" aria-label="Hotel location and address" class="section-pad bg-linen">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <div class="flex items-center gap-4 mb-6 reveal">
+        <span class="divider-line" aria-hidden="true"></span>
+        <span class="label-caps text-fjord">Finn oss</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Address & transport info -->
+        <div>
+          <h2 class="font-serif text-navy mb-10 reveal"
+              style="font-size:clamp(2rem,3.4vw,3rem); font-weight:400; line-height:1.2;">
+            I hjertet av<br><em>Haugesund.</em>
+          </h2>
+
+          <div class="space-y-8">
+
+            <div class="flex gap-5 reveal">
+              <div class="shrink-0 mt-1 w-8 h-8 rounded-full flex items-center justify-center" style="border:1px solid #8BA7B5;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8BA7B5" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 21s-8-7.5-8-13a8 8 0 1116 0c0 5.5-8 13-8 13z"/><circle cx="12" cy="8" r="2.5"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label-caps text-navy mb-1" style="font-size:0.62rem;">Adresse</p>
+                <p class="text-charcoal/75 leading-relaxed" style="font-size:0.95rem; font-weight:300;">
+                  Åsbygata 3<br>5528 Haugesund, Norway
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-5 reveal">
+              <div class="shrink-0 mt-1 w-8 h-8 rounded-full flex items-center justify-center" style="border:1px solid #8BA7B5;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8BA7B5" stroke-width="1.5" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label-caps text-navy mb-1" style="font-size:0.62rem;">Telefon</p>
+                <a href="tel:+4752869300" class="text-charcoal/75 hover:text-navy transition-colors" style="font-size:0.95rem; font-weight:300;">+47 52 86 93 00</a>
+              </div>
+            </div>
+
+            <div class="flex gap-5 reveal">
+              <div class="shrink-0 mt-1 w-8 h-8 rounded-full flex items-center justify-center" style="border:1px solid #8BA7B5;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8BA7B5" stroke-width="1.5" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label-caps text-navy mb-1" style="font-size:0.62rem;">E-post</p>
+                <a href="mailto:post@hotelmaritim.no" class="text-charcoal/75 hover:text-navy transition-colors" style="font-size:0.95rem; font-weight:300;">post@hotelmaritim.no</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Getting here -->
+          <div class="mt-12 pt-10 border-t border-sand reveal">
+            <p class="label-caps text-fjord mb-5" style="font-size:0.62rem;">Slik kommer du hit</p>
+            <div class="grid grid-cols-3 gap-6 text-center">
+              <div>
+                <p class="font-serif text-navy mb-1" style="font-size:1.4rem; font-weight:400;">15 min</p>
+                <p class="label-caps text-muted" style="font-size:0.58rem;">Fra flyplassen</p>
+              </div>
+              <div>
+                <p class="font-serif text-navy mb-1" style="font-size:1.4rem; font-weight:400;">0 min</p>
+                <p class="label-caps text-muted" style="font-size:0.58rem;">Sentrum</p>
+              </div>
+              <div>
+                <p class="font-serif text-navy mb-1" style="font-size:1.4rem; font-weight:400;">Direkte</p>
+                <p class="label-caps text-muted" style="font-size:0.58rem;">Sjøfront</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 reveal">
+            <a href="https://maps.google.com/?q=Quality+Hotel+Maritim,+Åsbygata+3,+5528+Haugesund" target="_blank" rel="noopener" class="btn-dark">
+              Åpne i kart
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Map embed -->
+        <div class="relative reveal-right" style="height:clamp(340px,40vw,520px);">
+          <!-- Corner bracket accents -->
+          <div class="absolute -top-3 -left-3 w-12 h-12 z-10" style="border-top:2px solid #8BA7B5; border-left:2px solid #8BA7B5;"></div>
+          <div class="absolute -bottom-3 -right-3 w-12 h-12 z-10" style="border-bottom:2px solid #8BA7B5; border-right:2px solid #8BA7B5;"></div>
+          <iframe
+            title="Quality Hotel Maritim location on map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2041.7!2d5.2672!3d59.4133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463b0af9b7a4d9c7%3A0x123456789!2s%C3%85sbygata+3%2C+5528+Haugesund!5e0!3m2!1sen!2sno!4v1234567890"
+            width="100%" height="100%"
+            style="border:0; filter: grayscale(20%) contrast(1.05);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       BOOKING CTA BAND
+  ══════════════════════════════════════════════════ -->
+  <div style="background:#1C2B3A; padding:4rem 2rem;">
+    <div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="reveal">
+        <p class="label-caps mb-2" style="color:#8BA7B5; font-size:0.62rem;">Klar til å ankomme?</p>
+        <h3 class="font-serif" style="font-size:clamp(1.4rem,2.5vw,2.2rem); font-weight:400; color:#F8F5F0; line-height:1.3;">
+          Reserver oppholdet ditt på Maritim.
+        </h3>
+      </div>
+      <div class="flex flex-wrap gap-4 reveal">
+        <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="btn-primary">
+          Bestill rom
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="mailto:konferanse@hotelmaritim.no" class="btn-ghost">Konferanseforespørsel</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer style="background:#111816; color:#F8F5F0; padding:5rem 2rem 2.5rem;" role="contentinfo">
+    <div class="max-w-screen-2xl mx-auto">
+
+      <!-- Footer main grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+        <!-- Brand column -->
+        <div class="lg:col-span-1">
+          <div class="mb-5">
+            <p class="font-serif text-white mb-1" style="font-size:1.5rem; font-weight:400; letter-spacing:0.03em;">Maritim</p>
+            <p class="label-caps" style="color:#8BA7B5; font-size:0.58rem;">Quality Hotel · Haugesund</p>
+          </div>
+          <p style="font-size:0.85rem; font-weight:300; color:rgba(248,245,240,0.45); line-height:1.7; max-width:220px;">
+            Sjøfrontsgjestfrihet i hjertet av Vestlandet, siden 1975.
+          </p>
+          <!-- Social links -->
+          <div class="flex gap-4 mt-6">
+            <a href="https://www.facebook.com/hotelmaritim" target="_blank" rel="noopener"
+               class="label-caps" style="font-size:0.58rem; color:rgba(248,245,240,0.4); transition:color 0.2s;"
+               onmouseover="this.style.color='#8BA7B5'" onmouseout="this.style.color='rgba(248,245,240,0.4)'">FB</a>
+            <a href="https://www.instagram.com/hotelmaritim" target="_blank" rel="noopener"
+               class="label-caps" style="font-size:0.58rem; color:rgba(248,245,240,0.4); transition:color 0.2s;"
+               onmouseover="this.style.color='#8BA7B5'" onmouseout="this.style.color='rgba(248,245,240,0.4)'">IG</a>
+            <a href="https://www.linkedin.com/company/quality-hotel-maritim" target="_blank" rel="noopener"
+               class="label-caps" style="font-size:0.58rem; color:rgba(248,245,240,0.4); transition:color 0.2s;"
+               onmouseover="this.style.color='#8BA7B5'" onmouseout="this.style.color='rgba(248,245,240,0.4)'">LI</a>
+          </div>
+        </div>
+
+        <!-- Hotel links -->
+        <div>
+          <p class="label-caps mb-5" style="color:#8BA7B5; font-size:0.62rem;">Hotellet</p>
+          <ul class="space-y-3">
+            <li><a href="#rooms"        class="footer-link" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Rom og suiter</a></li>
+            <li><a href="#dining"       class="footer-link" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Spise og restauranter</a></li>
+            <li><a href="#conferences"  class="footer-link" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Kurs og konferanser</a></li>
+            <li><a href="#wellness"     class="footer-link" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Velvære og opplevelser</a></li>
+            <li><a href="#gallery"      class="footer-link" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Galleri</a></li>
+          </ul>
+        </div>
+
+        <!-- Destination links -->
+        <div>
+          <p class="label-caps mb-5" style="color:#8BA7B5; font-size:0.62rem;">Destination</p>
+          <ul class="space-y-3">
+            <li><a href="#destination" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Haugesund</a></li>
+            <li><a href="https://www.info-visithaugesund.no" target="_blank" rel="noopener"
+                   style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Visit Haugesund ↗</a></li>
+            <li><a href="https://www.fjordnorway.com" target="_blank" rel="noopener"
+                   style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Fjord Norway ↗</a></li>
+            <li><a href="#location" style="font-size:0.88rem; font-weight:300; color:rgba(248,245,240,0.55); text-decoration:none; transition:color 0.2s;"
+                   onmouseover="this.style.color='#F8F5F0'" onmouseout="this.style.color='rgba(248,245,240,0.55)'">Slik kommer du hit</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <p class="label-caps mb-5" style="color:#8BA7B5; font-size:0.62rem;">Hold kontakten</p>
+          <p style="font-size:0.85rem; font-weight:300; color:rgba(248,245,240,0.45); line-height:1.65; margin-bottom:1.2rem;">
+            Sesongbud, arrangementsnyheter og destinasjonshistorier — levert diskret.
+          </p>
+          <form onsubmit="return false;" aria-label="Newsletter signup">
+            <div class="flex" style="border:1px solid rgba(139,167,181,0.25);">
+              <input
+                type="email"
+                placeholder="Din e-post"
+                aria-label="Email address for newsletter"
+                style="flex:1; background:transparent; border:none; outline:none; padding:0.65rem 0.9rem; font-size:0.82rem; font-weight:300; color:#F8F5F0; font-family:'Inter',sans-serif; min-width:0;"
+              />
+              <button type="submit"
+                style="background:#8BA7B5; border:none; padding:0.65rem 1rem; cursor:pointer; transition:background 0.2s; shrink:0;"
+                onmouseover="this.style.background='#7a97a5'" onmouseout="this.style.background='#8BA7B5'"
+                aria-label="Subscribe to newsletter">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 7h12M8 2l5 5-5 5" stroke="#F8F5F0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+          <p style="font-size:0.72rem; color:rgba(248,245,240,0.3); margin-top:0.6rem;">Ingen spam. Meld deg av når som helst.</p>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom bar -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6" style="border-top:1px solid rgba(139,167,181,0.12);">
+        <p style="font-size:0.75rem; font-weight:300; color:rgba(248,245,240,0.3);">
+          © 2026 Quality Hotel Maritim · Åsbygata 3, 5528 Haugesund · Del av Strawberry Hotels
+        </p>
+        <div class="flex gap-6">
+          <a href="#" style="font-size:0.72rem; color:rgba(248,245,240,0.3); text-decoration:none; transition:color 0.2s;"
+             onmouseover="this.style.color='rgba(248,245,240,0.6)'" onmouseout="this.style.color='rgba(248,245,240,0.3)'">Personvern</a>
+          <a href="#" style="font-size:0.72rem; color:rgba(248,245,240,0.3); text-decoration:none; transition:color 0.2s;"
+             onmouseover="this.style.color='rgba(248,245,240,0.6)'" onmouseout="this.style.color='rgba(248,245,240,0.3)'">Informasjonskapsler</a>
+          <a href="#" style="font-size:0.72rem; color:rgba(248,245,240,0.3); text-decoration:none; transition:color 0.2s;"
+             onmouseover="this.style.color='rgba(248,245,240,0.6)'" onmouseout="this.style.color='rgba(248,245,240,0.3)'">Tilgjengelighet</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="back-to-top"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    aria-label="Til toppen"
+    style="position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; background:#1C2B3A; border:1px solid rgba(139,167,181,0.3); color:#8BA7B5; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s, background 0.2s; z-index:50;"
+    onmouseover="this.style.background='#2C3E50'" onmouseout="this.style.background='#1C2B3A'">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M7 12V2M2 7l5-5 5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════════════ -->
+  <script>
+    /* ── Register GSAP plugins ── */
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── Nav scroll state ────────────────────────────── */
+    const nav = document.getElementById('site-nav');
+    let lastScroll = 0;
+
+    ScrollTrigger.create({
+      start: 'top -80px',
+      onUpdate: (self) => {
+        if (self.progress > 0) {
+          nav.classList.add('scrolled');
+          // Update hamburger bars color when scrolled
+          document.querySelectorAll('.menu-bar').forEach(b => b.style.background = '#2C2C2A');
+        } else {
+          nav.classList.remove('scrolled');
+          document.querySelectorAll('.menu-bar').forEach(b => b.style.background = '#F8F5F0');
+        }
+      }
+    });
+
+    /* ── Hero parallax ───────────────────────────────── */
+    gsap.to('#hero-img', {
+      yPercent: 18,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+
+    /* ── Hero entrance animations ────────────────────── */
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    heroTl
+      .fromTo('#hero-label',
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 1, delay: 0.3 })
+      .fromTo('#hero-headline',
+        { opacity: 0, y: 40, clipPath: 'inset(0 0 100% 0)' },
+        { opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)', duration: 1.2 },
+        '-=0.6')
+      .fromTo('#hero-sub',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.9 },
+        '-=0.7')
+      .fromTo('#hero-ctas',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        '-=0.5');
+
+    /* ── Mobile menu ─────────────────────────────────── */
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const menuToggle   = document.getElementById('menu-toggle');
+    const menuClose    = document.getElementById('menu-close');
+    const menuBars     = document.querySelectorAll('.menu-bar');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', openMobileMenu);
+    menuClose.addEventListener('click', closeMobileMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    /* ── Generic scroll reveal helper ───────────────────── */
+    function revealOnScroll(selector, vars = {}) {
+      gsap.utils.toArray(selector).forEach((el, i) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: vars.y ?? 32, x: vars.x ?? 0, scale: vars.scale ?? 1 },
+          {
+            opacity: 1, y: 0, x: 0, scale: 1,
+            duration: vars.duration ?? 1,
+            delay: (vars.delay ?? 0) + i * (vars.stagger ?? 0),
+            ease: vars.ease ?? 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: vars.start ?? 'top 88%',
+              toggleActions: 'play none none none',
+            }
+          }
+        );
+      });
+    }
+
+    /* ── Wire up reveal classes ──────────────────────── */
+    revealOnScroll('.reveal',       { y: 32, duration: 1 });
+    revealOnScroll('.reveal-left',  { x: -32, y: 0, duration: 1 });
+    revealOnScroll('.reveal-right', { x: 32,  y: 0, duration: 1 });
+    revealOnScroll('.reveal-scale', { scale: 0.96, y: 0, duration: 1.1 });
+
+    /* ── Counter animation (stat numbers) ────────────── */
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      gsap.fromTo({ val: 0 }, { val: target }, {
+        duration: 1.6,
+        ease: 'power2.out',
+        onUpdate: function() { el.textContent = Math.round(this.targets()[0].val) + suffix; },
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+      });
+    }
+    document.querySelectorAll('[data-count]').forEach(animateCounter);
+
+    /* ── Back to top button ──────────────────────────── */
+    const backToTop = document.getElementById('back-to-top');
+    ScrollTrigger.create({
+      start: 'top -400px',
+      onUpdate: (self) => {
+        backToTop.style.opacity = self.progress > 0 ? '1' : '0';
+        backToTop.style.pointerEvents = self.progress > 0 ? 'auto' : 'none';
+      }
+    });
+
+    /* ── Wellness section parallax ───────────────────── */
+    gsap.to('#wellness-bg', {
+      yPercent: 15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#wellness',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+  </script>
+
+</body>
+</html>
