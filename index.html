@@ -87,7 +87,7 @@
     }
 
     #site-nav.scrolled .nav-link  { color: #1C1C1A; }
-    #site-nav.scrolled .nav-logo  { color: #1B4332; }
+    #site-nav.scrolled .nav-logo  { color: #1B4332; box-shadow: 0 1px 4px rgba(27,67,50,0.12); }
     #site-nav.scrolled .nav-cta   { border-color: #1B4332; color: #1B4332; }
     #site-nav.scrolled .nav-cta:hover { background: #1B4332; color: #F5F5F3; }
 
@@ -284,18 +284,13 @@
     <div class="flex items-center justify-between h-20 max-w-screen-2xl mx-auto">
 
       <!-- Logo -->
-      <a href="#hero" class="nav-logo flex items-center gap-3 text-white transition-colors duration-300" aria-label="Quality Hotel Maritim — Hjem">
-        <!-- Quality Hotels Q-mark -->
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
-          <rect width="38" height="38" rx="3" fill="#1B4332"/>
-          <circle cx="17.5" cy="17.5" r="8.5" stroke="white" stroke-width="2.4" fill="none"/>
-          <path d="M23.5 23.5 L31 31" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M13 17.5 Q17.5 13 22 17.5" stroke="white" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-        </svg>
-        <div class="leading-none">
-          <p class="label-caps text-white/70" style="font-size:0.52rem; letter-spacing:0.28em; margin-bottom:3px;">Quality Hotel</p>
-          <p style="font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.06em; color:white; line-height:1;">Maritim</p>
-        </div>
+      <a href="#hero" class="nav-logo transition-opacity duration-300 hover:opacity-80" aria-label="Quality Hotel Maritim — Hjem"
+         style="display:block; border-radius:4px; overflow:hidden; background:#fff; padding:6px 10px;">
+        <img
+          src="logo.png"
+          alt="Quality Hotel Maritim"
+          style="height:40px; width:auto; display:block;"
+        />
       </a>
 
       <!-- Desktop nav links -->
