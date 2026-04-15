@@ -99,6 +99,7 @@
       overflow: hidden;
       display: flex;
       align-items: flex-end;
+      padding-top: 80px; /* clear the fixed nav */
     }
 
     #hero-img {
@@ -283,6 +284,58 @@
     .reveal-right { opacity: 0; transform: translateX(32px); }
     .reveal-scale { opacity: 0; transform: scale(0.96); }
 
+    /* ─── Restaurant modal ───────────────────────────── */
+    #restaurant-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    #restaurant-modal.open { display: flex; }
+
+    .modal-card {
+      background: #fff;
+      width: 100%;
+      max-width: 540px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 6px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      animation: modal-in 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      background: #1B4332;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+    }
+
+    .modal-restaurant-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.6rem;
+      border-bottom: 1px solid #f0f0ee;
+      transition: background 0.18s;
+    }
+    .modal-restaurant-item:last-child { border-bottom: none; }
+    .modal-restaurant-item:hover { background: #f8faf9; }
+
     /* ─── Mobile menu ─────────────────────────────────── */
     #mobile-menu {
       display: none;
@@ -435,7 +488,7 @@
               </svg>
               Kjøp billett
             </a>
-            <a href="https://hotelmaritim.no/restaurant/" target="_blank" rel="noopener" class="hero-book-tab">
+            <a href="#" onclick="openRestaurantModal(); return false;" class="hero-book-tab">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M3 11l19-9-9 19-2-8-8-2z"/>
               </svg>
@@ -1779,6 +1832,79 @@
 
 
   <!-- ══════════════════════════════════════════════════
+       RESTAURANT MODAL
+  ══════════════════════════════════════════════════ -->
+  <div id="restaurant-modal" role="dialog" aria-modal="true" aria-label="Velg restaurant">
+    <div class="modal-card">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <div>
+          <p class="label-caps" style="color:#5A9E7B; font-size:0.56rem; margin-bottom:5px;">Velg restaurant</p>
+          <h3 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#fff; font-size:1.15rem; letter-spacing:0.02em; line-height:1;">Book bord</h3>
+        </div>
+        <button onclick="closeRestaurantModal()" aria-label="Lukk"
+          style="background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.55); font-size:2rem; line-height:1; padding:0.2rem 0.4rem; transition:color 0.2s;"
+          onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">&times;</button>
+      </div>
+
+      <!-- Restaurant list -->
+      <div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">77</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">Ny restaurant, bakeri og kino ved Smedasundet</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">Naustet Restaurant</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">À la carte med lokale sjømat- og kjøttretter</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">RENÉ</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">Kvalitetsopplevelse med deilig mat og gode drikkevarer</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">Gallionen Restaurant</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">Prisbelønnet frokost og lunsjbuffet</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">BB Restaurant</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">Mat fra grillen — samler hele familien rundt bordet</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+        <div class="modal-restaurant-item">
+          <div>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.95rem; color:#1C1C1A; margin-bottom:3px;">Brovingen Selskapslokale</p>
+            <p style="font-size:0.82rem; color:#5C7268; font-weight:300; line-height:1.45;">Eksklusiv opplevelse med sesongbaserte menyer og lokale råvarer</p>
+          </div>
+          <a href="https://nchmaritimbooking.munu.shop/" target="_blank" rel="noopener" class="btn-dark" style="padding:0.55rem 1.2rem; font-size:0.68rem; flex-shrink:0;">Bestill</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
        SCRIPTS
   ══════════════════════════════════════════════════ -->
   <script>
@@ -1898,6 +2024,25 @@
       });
     }
     document.querySelectorAll('[data-count]').forEach(animateCounter);
+
+    /* ── Restaurant modal ───────────────────────────── */
+    const restaurantModal = document.getElementById('restaurant-modal');
+
+    function openRestaurantModal() {
+      restaurantModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeRestaurantModal() {
+      restaurantModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    restaurantModal.addEventListener('click', (e) => {
+      if (e.target === restaurantModal) closeRestaurantModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeRestaurantModal();
+    });
 
     /* ── Back to top button ──────────────────────────── */
     const backToTop = document.getElementById('back-to-top');
