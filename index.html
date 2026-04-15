@@ -129,6 +129,48 @@
       padding: 0 2rem 5rem;
     }
 
+    /* ─── Hero booking tabs ──────────────────────────── */
+    .hero-book-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-book-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 1rem 1.8rem;
+      background: #FCAE17;
+      color: #1C1C1A;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-right: 1px solid rgba(28,28,26,0.15);
+      transition: background 0.22s, color 0.22s;
+      white-space: nowrap;
+    }
+
+    .hero-book-tab:last-child { border-right: none; }
+
+    .hero-book-tab:hover {
+      background: #e49c10;
+    }
+
+    @media (max-width: 640px) {
+      .hero-book-tab {
+        flex: 1 1 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(28,28,26,0.15);
+        justify-content: center;
+      }
+      .hero-book-tab:last-child { border-bottom: none; }
+    }
+
     /* ─── Buttons ─────────────────────────────────────── */
     .btn-primary {
       display: inline-flex;
@@ -377,16 +419,35 @@
         </p>
 
         <!-- CTAs -->
-        <div class="flex flex-wrap gap-4" id="hero-ctas">
-          <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="btn-primary">
-            Bestill rom
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
+        <div id="hero-ctas">
+
+          <!-- Booking tabs -->
+          <div class="hero-book-tabs">
+            <a href="https://www.strawberryhotels.com" target="_blank" rel="noopener" class="hero-book-tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 20v-9a2 2 0 012-2h16a2 2 0 012 2v9"/><path d="M2 14h20"/><path d="M7 14V8a5 5 0 0110 0v6"/>
+              </svg>
+              Book rom
+            </a>
+            <a href="https://hotelmaritim.no/tilbud/" target="_blank" rel="noopener" class="hero-book-tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="9" width="20" height="12" rx="2"/><path d="M16 2v4M8 2v4M2 13h20"/>
+              </svg>
+              Kjøp billett
+            </a>
+            <a href="https://hotelmaritim.no/restaurant/" target="_blank" rel="noopener" class="hero-book-tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 11l19-9-9 19-2-8-8-2z"/>
+              </svg>
+              Book bord
+            </a>
+          </div>
+
+          <!-- Secondary CTA -->
           <a href="#story" class="btn-ghost">
             Utforsk hotellet
           </a>
+
         </div>
 
       </div>
