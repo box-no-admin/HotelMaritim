@@ -97,9 +97,6 @@
       height: 100dvh;
       min-height: 600px;
       overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      padding-top: 80px; /* clear the fixed nav */
     }
 
     #hero-img {
@@ -124,10 +121,16 @@
     }
 
     #hero-content {
-      position: relative;
+      position: absolute;
+      top: 120px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 2;
-      width: 100%;
       padding: 0 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     /* ─── Hero booking tabs ──────────────────────────── */
